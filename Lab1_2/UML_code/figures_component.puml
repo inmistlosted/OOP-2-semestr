@@ -1,0 +1,50 @@
+@startuml
+
+skinparam Padding 10
+skinparam Size 20
+
+skinparam interface {
+  backgroundColor RosyBrown
+  borderColor orange
+  padding 70
+}
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+[User] as A
+[WebPage] as B
+[Server] as C
+() "Points" as U1
+() "Points" as U2
+() "Info about figure" as U3
+
+A - U1
+U1 )- B
+B --- U2
+U2 )--- C
+C -- U3
+U3 )- A
+
+
+'package "Some Group" {
+'HTTP - [First Component]
+'[Another Component]
+'}
+'
+'package "Other Groups" {
+'FTP - [Second Component]
+'
+'[First Component] --> FTP
+'}
+
+@enduml

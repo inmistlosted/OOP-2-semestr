@@ -1,0 +1,28 @@
+@startuml
+
+skinparam backgroundColor LightYellow
+skinparam state {
+  StartColor MediumBlue
+  EndColor Red
+  BackgroundColor Peru
+  BackgroundColor<<Warning>> Olive
+  BorderColor Gray
+  FontName Impact
+}
+
+hide empty description
+state "WebSite Opened" as S1
+state "Figure is chosen" as S2
+state "Points of figure are entered" as S3
+state "Perimetr, Square and Type are shown" as S4
+state "Figure is drawn" as S5
+
+[*] -> S1 : open
+S1 --> S2 : choose figure
+S2 --> S3 : enter points
+S3 --> S1 : wrong points
+S3 --> S4 : calculate P, S and Type
+S4 -> S5 : build figure with points
+S5 --> [*] : close
+
+@enduml

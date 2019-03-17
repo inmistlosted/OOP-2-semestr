@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function pow(x, n) {
+        if(n!==0)
+        {
+            return x * pow(x, n-1);
+        }
+        else
+        {
+            return x;
+        }
+    }
+
+    console.log(pow(2,2));
+</script>
+
+<div id="choose" class="choose">
+<h2>What geometric figure do you want to make?</h2>
+<label id="type">
+    <span class="radio"><input type="radio" value="1" name="r1" onchange="show(this.value)">Triangle</span>
+    <span class="radio"><input type="radio" value="2" name="r1" onchange="show(this.value)">Quadrilateral</span>
+    <span class="radio"><input type="radio" value="3" name="r1" onchange="show(this.value)">Pentagon</span>
+</label>
+</div>
+<div class="points">
+    <form id="p1" class="point">
+        Enter coordinates of point A<br>
+        X: <input type="number" id="p1_x"><br>
+        Y: <input type="number" id="p1_y">
+    </form>
+    <form id="p2" class="point">
+        Enter coordinates of point B<br>
+        X: <input type="number" id="p2_x"><br>
+        Y: <input type="number" id="p2_y">
+    </form>
+    <form id="p3" class="point">
+        Enter coordinates of point C<br>
+        X: <input type="number" id="p3_x"><br>
+        Y: <input type="number" id="p3_y">
+    </form>
+    <form id="p4" class="point">
+        Enter coordinates of point D<br>
+        X: <input type="number" id="p4_x"><br>
+        Y: <input type="number" id="p4_y">
+    </form>
+    <form id="p5" class="point">
+        Enter coordinates of point E<br>
+        X: <input type="number" id="p5_x"><br>
+        Y: <input type="number" id="p5_y">
+    </form>
+    <input type="button" value="Calculate" style="display: none" onclick="createTri()" id="tri" class="btn">
+    <input type="button" value="Calculate" style="display: none" onclick="createQuad()" id="quad" class="btn">
+    <input type="button" value="Calculate" style="display: none" onclick="createPent()" id="pent" class="btn">
+    <input type="button" value="Draw other figure" style="display: none" onclick="show(1)" id="btn2" class="btn">
+</div>
+
+<h2 id="mess1" class="info"></h2>
+<h2 id="mess2" class="info"></h2>
+<h2 id="mess3" class="info"></h2>
+<h2 id="mess4" class="info"></h2>
+<h2 id="mess5" class="info"></h2>
+<h2 id="mess6" class="info"></h2>
+<div id="figure" class="draw">
+
+</div>
+
+<script src="geomFigures.js"></script>
+
+
+</body>
+</html>
