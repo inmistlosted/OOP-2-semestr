@@ -1,4 +1,0 @@
-- Was added new class Figure, common for classes Triangle, Quad and Pentagon
-  It made more understandable structure of the project, because now the inheritance is clear
-  And class Figure makes it possible to rewrite the behavior of project in 2 functions(not 4, as it was before).
-- Updated uml class diagram(added new class Figure).
