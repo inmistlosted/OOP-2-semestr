@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="list.js"></script>
+    <script src="listpatterns.js"></script>
+
+    <title>List Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="main_popup">
+    <div id="popup">
+        <p>
+        Enter element
+        <input type="text" id="elmnt">
+        </p>
+        <p>
+        Enter index
+        <input type="number" id="index">
+        </p>
+        <button class="btn_popup" id="btn_popup">OK</button>
+    </div>
+</div>
+
+<div id="title">
+    List Generator<br>
+    <input type="button" value="START" id="start">
+</div>
+
+<div id="choose">
+    Choose operation<br>
+    <div class="btns">
+        <input type="button" value="Make empty list" id="empty_list_choose" class="btn">
+        <input type="button" value="Make random list" id="random_list" class="btn">
+        <input type="button" value="Make fixed list" id="cstm_list" class="btn">
+        <input type="button" value="Make own list" id="own_list" class="btn">
+    </div>
+</div>
+
+
+<div id="empty_list">
+    <button id="other_list" class="other_list">Make another list</button>
+    <p>Your list:</p>
+    <p id="showList"></p>
+    <p id="showSize"></p>
+    <p>Operations</p>
+    <div class="oper_btns">
+        <button class="oper_btn" id="push">Push back element</button>
+        <button class="oper_btn" id="ins_at">Insert at position</button>
+        <button class="oper_btn" id="rem_ind">Remove from position</button>
+        <button class="oper_btn" id="rem_elmnt">Remove element</button>
+        <button class="oper_btn" id="find_ind">Find index of element</button>
+        <button class="oper_btn" id="find_elmnt">Find element with index</button>
+        <button class="oper_btn" id="turn_queue">Turn a list into a Queue</button>
+        <button class="oper_btn" id="turn_stack">Turn a list into a Stack</button>
+        <button class="oper_btn" id="time">Calculate time of processing operations on list</button>
+        <button class="oper_btn" id="sort">Sort list</button>
+    </div>
+</div>
+
+<div id="queue">
+    <button id="other_list_queue" class="other_list">Make another list</button>
+    <p>Your queue:</p>
+    <p id="showQueue"></p>
+    <p id="showQueueSize"></p>
+
+    <div class="oper_btns queue_btns">
+        <p>Operations</p>
+        <button class="oper_btn queue_btn" id="enq">Enqueue element</button>
+        <button class="oper_btn queue_btn" id="deq">dequeue element</button>
+        <button class="oper_btn queue_btn" id="front">Front element</button>
+    </div>
+</div>
+
+<div id="stack">
+    <button id="other_list_stack" class="other_list">Make another list</button>
+    <p>Your stack:</p>
+    <p id="showStack"></p>
+    <p id="showStackSize"></p>
+
+    <div class="oper_btns queue_btns">
+        <p>Operations</p>
+        <button class="oper_btn queue_btn" id="push_st">Push element</button>
+        <button class="oper_btn queue_btn" id="pop">Pop element</button>
+        <button class="oper_btn queue_btn" id="peek">Peek element</button>
+    </div>
+</div>
+
+<div id="time_measure">
+    <button id="other_list_time" class="other_list">Make another list</button>
+    <p>Your list:</p>
+    <p id="showTimeList"></p>
+    <p id="showTimeSize"></p>
+    <p id="showTime">Time of processing: *-------------------* </p>
+
+    <div class="oper_btns time_btns">
+        <p>Operations</p>
+        <button class="oper_btn time_btn" id="time_push">Push back element</button>
+        <button class="oper_btn time_btn" id="time_ins_at">Insert at position</button>
+        <button class="oper_btn time_btn" id="time_rem_ind">Remove from position</button>
+        <button class="oper_btn time_btn" id="time_rem_elmnt">Remove element</button>
+        <button class="oper_btn time_btn" id="time_find_ind">Find index of element</button>
+        <button class="oper_btn time_btn" id="time_find_elmnt">Find element with index</button>
+        <button class="oper_btn time_btn" id="time_bubble">Bubble sort</button>
+        <button class="oper_btn time_btn" id="time_merge">Merge sort</button>
+        <button class="oper_btn time_btn" id="time_quick">Quick sort</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
