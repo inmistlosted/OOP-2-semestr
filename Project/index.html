@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ФотоРедактор</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="nav">
+
+    <h1>ФотоРедактор</h1>
+
+    <div class="nav_inputs">
+        <span>Введите URL картинки:</span>
+        <input id="photo_input" type="text">
+
+        <input id="sbmt" class="button" type="submit" onclick="setURLImage()" onmouseover="pointBtn('sbmt')" onmouseout="unpointBtn('sbmt')">
+        <button id="org" class="button"  onclick="showOriginalImage()" onmouseover="pointBtn('org')" onmouseout="unpointBtn('org')">Оригинал</button>
+        <button id="reset" class="button" onclick="resetAll()" onmouseover="pointBtn('reset')" onmouseout="unpointBtn('reset')">Сбросить</button>
+        <button id="mirr" class="button" onclick="turnX()" onmouseover="pointBtn('mirr')" onmouseout="unpointBtn('mirr')">Отзеркалить по Y</button>
+        <button id="flip" class="button" onclick="turnY()" onmouseover="pointBtn('flip')" onmouseout="unpointBtn('flip')">Отзеркалить по X</button>
+        <button id="clip" class="button btn-bar" onclick="chooseShape()" onmouseover="pointBtn('clip')" onmouseout="unpointBtn('clip')">Фигуры</button>
+
+        <img id="originalImage" src="https://www.fluentin3months.com/wp-content/uploads/2019/01/beautiful-in-different-languages.jpg" alt="" onmouseover="seeOriginal()" onmouseout="unseeOriginal()">
+
+            <div class="all_shapes">
+                <div class="shapes" data-shape="none" onclick="chooseShape()">
+                    <p id="close_shapes" onmouseover="pointRedBtn('close_shapes')" onmouseout="unpointRedBtn('close_shapes')">Закрыть</p>
+                </div>
+
+                <div class="shapes" data-shape="none">
+                    <p id="s1" onmouseover="pointBtn('s1')" onmouseout="unpointBtn('s1')">None</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%)">
+                    <p id="s2" onmouseover="pointBtn('s2')" onmouseout="unpointBtn('s2')">Левый шеврон</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%)">
+                    <p id="s3" onmouseover="pointBtn('s3')" onmouseout="unpointBtn('s3')">Правый шеврон</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)">
+                    <p id="s4" onmouseover="pointBtn('s4')" onmouseout="unpointBtn('s4')">Ромб</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)">
+                    <p id="s5" onmouseover="pointBtn('s5')" onmouseout="unpointBtn('s5')">Звезда</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)">
+                    <p id="s6" onmouseover="pointBtn('s6')" onmouseout="unpointBtn('s6')">Скос</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%)">
+                    <p id="s7" onmouseover="pointBtn('s7')" onmouseout="unpointBtn('s7')">Девятиугольник</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)">
+                    <p id="s8" onmouseover="pointBtn('s8')" onmouseout="unpointBtn('s8')">Параллелограмм</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="circle(50% at 50% 50%)">
+                    <p id="s9" onmouseover="pointBtn('s9')" onmouseout="unpointBtn('s9')">Круг</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(25% 0%, 100% 1%, 100% 100%, 25% 100%, 0% 50%)">
+                    <p id="s10" onmouseover="pointBtn('s10')" onmouseout="unpointBtn('s10')">Левый указатель</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%)">
+                    <p id="s11" onmouseover="pointBtn('s11')" onmouseout="unpointBtn('s11')">Правый указатель</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%)">
+                    <p id="s12" onmouseover="pointBtn('s12')" onmouseout="unpointBtn('s12')">Запрет</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="inset(5% 20% 15% 10%)">
+                    <p id="s13" onmouseover="pointBtn('s13')" onmouseout="unpointBtn('s13')">Вставка</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)">
+                    <p id="s14" onmouseover="pointBtn('s14')" onmouseout="unpointBtn('s14')">Восьмиугольник</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)">
+                    <p id="s15" onmouseover="pointBtn('s15')" onmouseout="unpointBtn('s15')">Трапеция</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%)">
+                    <p id="s16" onmouseover="pointBtn('s16')" onmouseout="unpointBtn('s16')">Шпунт</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)">
+                    <p id="s17" onmouseover="pointBtn('s17')" onmouseout="unpointBtn('s17')">Шестиугольник</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)">
+                    <p id="s18" onmouseover="pointBtn('s18')" onmouseout="unpointBtn('s18')">Рамка</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%)">
+                    <p id="s19" onmouseover="pointBtn('s19')" onmouseout="unpointBtn('s19')">Десятиугольник</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)">
+                    <p id="s20" onmouseover="pointBtn('s20')" onmouseout="unpointBtn('s20')">Сообщение</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)">
+                    <p id="s21" onmouseover="pointBtn('s21')" onmouseout="unpointBtn('s21')">Пятиугольник</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%)">
+                    <p id="s22" onmouseover="pointBtn('s22')" onmouseout="unpointBtn('s22')">Левая стрелка</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)">
+                    <p id="s23" onmouseover="pointBtn('s23')" onmouseout="unpointBtn('s23')">Правая стрелка</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)">
+                    <p id="s24" onmouseover="pointBtn('s24')" onmouseout="unpointBtn('s24')">Семиугольник</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%)">
+                    <p id="s25" onmouseover="pointBtn('s25')" onmouseout="unpointBtn('s25')">Крест</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="ellipse(25% 40% at 50% 50%)">
+                    <p id="s26" onmouseover="pointBtn('s26')" onmouseout="unpointBtn('s26')">Элипс</p>
+                    <span></span>
+                </div>
+
+                <div class="shapes" data-shape="polygon(50% 0%, 0% 100%, 100% 100%)">
+                    <p id="s27" onmouseover="pointBtn('s27')" onmouseout="unpointBtn('s27')">Треугольник</p>
+                    <span></span>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div class="tools">
+
+    <div class="btns">
+        <p>Инструменты</p>
+        <input id="bas" type="button" value="Основные" onclick="showBasic()" class="button tools_btn" onmouseover="unpointBtn('bas')" onmouseout="pointBtn('bas')">
+        <input id="trans" type="button" value="Координаты" onclick="showTransform()" class="button tools_btn" onmouseover="unpointBtn('trans')" onmouseout="pointBtn('trans')">
+        <input id="grad" type="button" value="Градиенты" onclick="showGradient()" class="button tools_btn" onmouseover="unpointBtn('grad')" onmouseout="pointBtn('grad')">
+        <input id="blnd" type="button" value="Наложение слоев" onclick="showBlend()" class="button tools_btn" onmouseover="unpointBtn('blnd')" onmouseout="pointBtn('blnd')">
+        <input id="tekst" type="button" value="Надпись" onclick="showText()" class="button tools_btn" onmouseover="unpointBtn('tekst')" onmouseout="pointBtn('tekst')">
+        <input id="bord" type="button" value="Фон и рамка" onclick="showBorder()" class="button tools_btn" onmouseover="unpointBtn('bord')" onmouseout="pointBtn('bord')">
+    </div>
+
+    <div class="controls">
+        <div id="basic" class="changes height1">
+
+            <p>Основные изменения</p>
+
+            <div class="sliders">
+                <label for="opacity">Прозрачность:</label>
+                <input id="opacity" type="range" name="opacity" min="0" max="100" value="100" data-sizing="%">
+                <span>100%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="invert">Инверция:</label>
+                <input id="invert" type="range" name="invert" min="0" max="100" value="0" data-sizing="%">
+                <span>0%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="saturate">Насыщенность:</label>
+                <input id="saturate" type="range" name="saturate" min="0" max="300" value="100" data-sizing="%">
+                <span>100%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="sepia">Сепия:</label>
+                <input id="sepia" type="range" name="sepia" min="0" max="100" value="0" data-sizing="%">
+                <span>0%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="hue-rotate">Оттенок:</label>
+                <input id="hue-rotate" type="range" name="hue-rotate" min="0" max="360" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+
+            <div class="sliders">
+                <label for="image-opacity">Сочность:</label>
+                <input id="image-opacity"  type="range" name="image-opacity" step="0.1" min="0" max="1" value="1" >
+                <span>1</span>
+            </div>
+
+            <div class="sliders">
+                <label for="contrast">Контраст:</label>
+                <input id="contrast" type="range" name="contrast" min="50" max="200" value="100" data-sizing="%">
+                <span>100%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="greyscale">Оттенок серого:</label>
+                <input id="greyscale" type="range" name="greyscale" min="0" max="100" value="0" data-sizing="%">
+                <span>0%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="blur">Размытость:</label>
+                <input id="blur" type="range" name="blur" min="0" max="20" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="brightness">Яркость:</label>
+                <input id="brightness" type="range" name="brightness" min="0" max="200" value="100" data-sizing="%">
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div id="transform" class="changes height2">
+
+            <p>Изменение положения</p>
+
+            <div class="sliders">
+                <label for="scaleX">Масштаб по X:</label>
+                <input id="scaleX" type="range" name="scaleX" step="0.10" min="-1" max="3" value="1" data-sizing="">
+                <span>1</span>
+            </div>
+
+            <div class="sliders">
+                <label for="skewX">Скос X:</label>
+                <input id="skewX" type="range" name="skewX" min="-90" max="90" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+
+            <div class="sliders">
+                <label for="translateX">Движение по X:</label>
+                <input id="translateX" type="range" name="translateX" min="-500" max="800" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="scaleXY">Масштаб X&amp;Y:</label>
+                <input id="scaleXY" type="range" name="scaleXY" step="0.10" min="0" max="5" value="1" data-sizing="">
+                <span>1</span>
+            </div>
+
+            <div class="sliders">
+                <label for="scaleY">Масштаб по Y:</label>
+                <input id="scaleY" type="range" name="scaleY" step="0.10" min="-1" max="3" value="1" data-sizing="">
+                <span>1</span>
+            </div>
+
+            <div class="sliders">
+                <label for="skewY">Скос Y:</label>
+                <input id="skewY" type="range" name="skewY"  min="-90" max="90" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+
+            <div class="sliders">
+                <label for="translateY">Движение по Y:</label>
+                <input id="translateY" type="range" name="translateY"  min="-500" max="500" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="rotate">Поворот:</label>
+                <input id="rotate" type="range" name="rotate" min="0" max="360" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+        </div>
+
+        <div id="gradient" class="changes height3 gradient">
+
+            <p>Градиенты</p>
+
+            <div class="sliders">
+                <label for="linear-gradient-overlay-1">Лин. градиент 1:</label>
+                <input id="linear-gradient-overlay-1" class="color" name="linear-gradient-overlay-1" type="text">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="linear-gradient-overlay-2">Лин. градиент 2:</label>
+                <input id="linear-gradient-overlay-2" class="color" name="linear-gradient-overlay-2" type="text">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="linear-gradient-overlay-opacity">Лин. сочность:</label>
+                <input id="linear-gradient-overlay-opacity" type="range" name="linear-gradient-overlay-opacity" step="0.1" min="0" max="1" value="0.5">
+                <span>0.5</span>
+            </div>
+
+            <div class="sliders">
+                <label for="linear-gradient-flow">Лин. плавность:</label>
+                <input id="linear-gradient-flow" type="range" name="linear-gradient-flow" min="-150" max="100" value="0" data-sizing="%">
+                <span>0%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="radial-gradient-overlay-1">Рад. градиент 1:</label>
+                <input id="radial-gradient-overlay-1" class="color"  name="radial-gradient-overlay-1" type="text">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="radial-gradient-overlay-2">Рад. градиент 2:</label>
+                <input id="radial-gradient-overlay-2" class="color" name="radial-gradient-overlay-2" type="text">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="radial-gradient-position-x">Рад. позиция X:</label>
+                <input id="radial-gradient-position-x" type="range" name="radial-gradient-position-x" min="0" max="100" value="50" data-sizing="%">
+                <span>50%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="radial-gradient-position-y">Рад. позиция Y:</label>
+                <input id="radial-gradient-position-y" type="range" name="radial-gradient-position-y" min="0" max="100" value="50" data-sizing="%">
+                <span>50%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="radial-gradient-overlay-opacity">Рад. сочность:</label>
+                <input id="radial-gradient-overlay-opacity" type="range" name="radial-gradient-overlay-opacity" step="0.1" min="0" max="1" value="0.5">
+                <span>0.5</span>
+            </div>
+
+            <div class="sliders">
+                <label for="radial-gradient-size">Рад. размер:</label>
+                <input id="radial-gradient-size" type="range" name="radial-gradient-size" min="-100" max="100" value="20" data-sizing="%">
+                <span>0%</span>
+            </div>
+
+            <div class="sliders">
+                <label for="linear-gradient-direction">Лин. наклон:</label>
+                <input id="linear-gradient-direction" type="range" name="linear-gradient-direction" min="0" max="360" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+        </div>
+
+        <div id="blend" class="changes height4">
+
+            <p>Наложение слоев:</p>
+
+                <form>
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="none"  onclick="resetComposition()">
+                        <span>None</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="color-burn">
+                        <span>Ожог</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="difference">
+                        <span>Разница</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="hard-light">
+                        <span>Жесткий свет</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="hue">
+                        <span>Оттенок</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="lighten">
+                        <span>Осветленность</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="luminosity">
+                        <span>Светимость</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="overlay">
+                        <span>Наложение</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="saturation">
+                        <span>Насыщенность</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="multiply">
+                        <span>Умножение</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="color-dodge">
+                        <span>Уклонение</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="exclusion">
+                        <span>Исключение</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="color">
+                        <span>Цвет</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="darken">
+                        <span>Утемненность</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="soft-light">
+                        <span>Мягкий свет</span>
+                    </div>
+
+                    <div class="radio-div">
+                        <input class="composition" type="radio" name="composition" value="screen">
+                        <span>Экран</span>
+                    </div>
+                </form>
+        </div>
+
+        <div id="text" class="changes height5">
+
+            <p>Надпись</p>
+
+            <div class="text_input">
+                <label id="text-label" for="inscription_value">Надпись:</label>
+                <input id="inscription_value"  type="text" name="inscription_value"><span class="withoutUnit"></span>
+                <button id="addt" class="button text_input_btns" onclick="addInscription()" onmouseover="pointRedBtn('addt')" onmouseout="unpointBtn('addt')">Добавить</button>
+                <button id="remt" class="button text_input_btns" onclick="removeInscription()" onmouseover="pointRedBtn('remt')" onmouseout="unpointBtn('remt')">Убрать</button>
+                <button id="togt" class="button text_input_btns" onclick="switchInscription()" onmouseover="pointRedBtn('togt')" onmouseout="unpointBtn('togt')">Спрятать/Показать</button>
+            </div>
+
+            <div class="sliders">
+                <label for="text-color">Цвет текста:</label>
+                <input id="text-color" class="color" type="text" name="text-color">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-shadow-color">Цвет тени:</label>
+                <input id="text-shadow-color" class="color" type="text" name="text-shadow-color">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-shadow">Размер тени:</label>
+                <input id="text-shadow"  type="range" name="text-shadow"  min="-20" max="20" value="1" data-sizing="px">
+                <span >1px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-size">Размер текста:</label>
+                <input id="text-size"  type="range" name="text-size"  min="0" max="300" value="30" data-sizing="px">
+                <span>30px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-translate-x">Движение по X:</label>
+                <input id="text-translate-x" type="range" name="text-translate-x" min="-250" max="600" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-translate-y">Движение по Y:</label>
+                <input id="text-translate-y" type="range" name="text-translate-y" min="-150" max="500" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="word-spacing">Отступ от слов:</label>
+                <input id="word-spacing" type="range" name="word-spacing" min="-5" step="0.25" max="3" value="0.15" data-sizing="em">
+                <span>0.25em</span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-rotate">Поворот текста:</label>
+                <input id="text-rotate" type="range" name="text-rotate" min="0" max="360" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+
+            <div class="sliders">
+                <label for="letter-spacing">Отступ от букв:</label>
+                <input id="letter-spacing" type="range" name="letter-spacing" min="-50" max="100" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="text-skew">Наклон текста:</label>
+                <input id="text-skew" type="range" name="text-skew" min="-90" max="90" value="0" data-sizing="deg">
+                <span>0deg</span>
+            </div>
+
+
+        </div>
+
+        <div class="changes fonts height2" id="fonts">
+
+            <p>Шрифты</p>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Ranga">
+                <span>Ranga</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Raleway">
+                <span>Raleway</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Cute Font">
+                <span>Cute Font</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Anton">
+                <span>Anton</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Indie Flower">
+                <span>Indie Flower</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Shadows Into Light">
+                <span>Shadows Into Light</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Cinzel">
+                <span>Cinzel</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Gloria Hallelujah">
+                <span>Gloria Hallelujah</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Permanent Marker">
+                <span>Permanent Marker</span>
+            </div>
+
+            <div class="radio-div">
+                <input class="font" type="radio" name="font" value="Orbitron">
+                <span>Orbitron</span>
+            </div>
+        </div>
+
+        <div id="border" class="changes height7 brdr">
+
+            <p>Цвет фона и рамки</p>
+
+            <div class="sliders">
+                <label for="background-color">Цвет фона:</label>
+                <input id="background-color"  class="color" type="text" name="background-color">
+                <span class="withoutUnit"></span>
+            </div>
+
+            <div class="sliders">
+                <label for="border-color">Цвет рамки:</label>
+                <input id="border-color" class="color" type="text" name="border-color" value="#cd5c5c">
+                <span class="withoutUnit"></span>
+            </div>
+        </div>
+
+        <div id="brdr_size" class="changes height6 brdr_size">
+
+            <p>Стилизация рамки:</p>
+
+            <div class="sliders">
+                <label for="border-width">Ширина рамки:</label>
+                <input id="border-width" type="range" name="border-width" min="0" max="50" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="border-radius">Радиус рамки:</label>
+                <input id="border-radius" type="range" name="border-radius" min="0" max="250" value="0" data-sizing="px">
+                <span>0px</span>
+            </div>
+
+            <div class="sliders">
+                <label for="outer-border-radius">Внешняя рамка:</label>
+                <input id="outer-border-radius"  type="range" name="outer-border-radius" min="0" max="100" value="0" data-sizing="%">
+                <span>0%</span>
+            </div>
+        </div>
+
+        <div class="changes height6 brdr_styles" id="brdr_styles">
+            <form id="brdr_types">
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="none">
+                    <span>None</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="solid">
+                    <span>Сплошная</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="ridge">
+                    <span>Ребристая внутренняя</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="double">
+                    <span>Двойная</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="outset">
+                    <span>Картинная рамка</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="hidden">
+                    <span>Спрятанная</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="groove">
+                    <span>Ребристая внешняя</span>
+                </div>
+
+                <div class="radio-div">
+                    <input class="brdr_types" type="radio" name="brdr_types" value="dashed">
+                    <span>Пунктирная</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="main_img">
+    <div class="fon">
+        <div class="img_view">
+            <figure class="clip_path">
+                <figure class="newPic">
+                    <figure class="oldPic">
+                        <img id="image_small" src="https://www.fluentin3months.com/wp-content/uploads/2019/01/beautiful-in-different-languages.jpg">
+                    </figure>
+                </figure>
+            </figure>
+
+            <div id="inputed_text">
+                <span id="inscription_small"></span>
+            </div>
+        </div>
+    </div>
+
+    <button id="full_img_btn" class="button" onclick="openFullImage()" onmouseover="pointBtn('full_img_btn')" onmouseout="unpointBtn('full_img_btn')">Полномасштабное фото</button>
+    <span class="full_img_open">Откройте как полномасштабное фото, чтобы сделать скриншот</span>
+
+    <div id="full_img">
+        <div class="fon">
+            <div class="img_view">
+                <figure class="clip_path">
+                    <figure class="newPic">
+                        <figure class="oldPic">
+                            <img id="image_big" src="https://www.fluentin3months.com/wp-content/uploads/2019/01/beautiful-in-different-languages.jpg">
+                        </figure>
+                    </figure>
+                </figure>
+
+                <div id="inputed_text_big">
+                    <span id="inscription_big"></span>
+                </div>
+            </div>
+
+            <span id="close_full_img" onclick="closeFullImage()" onmouseout="unpointClose()" onmouseover="pointClose()">ЗАКРЫТЬ</span>
+        </div>
+    </div>
+</div>
+<div class="footer"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
