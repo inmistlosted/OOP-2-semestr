@@ -1,0 +1,52 @@
+@startuml
+
+skinparam usecase {
+	BackgroundColor DarkSeaGreen
+	BorderColor DarkSlateGray
+
+	BackgroundColor<< Main >> YellowGreen
+	BorderColor<< Main >> YellowGreen
+
+	ArrowColor Olive
+	ActorBorderColor black
+	ActorFontName Courier
+
+	ActorBackgroundColor<< Human >> Gold
+}
+
+:Actor: as Actor
+(Choose figure) as Use1
+(Choose Triangle) as Use1_1
+(Choose Quadrilateral) as Use1_2
+(Choose Pentagon) as Use1_3
+(Enter coordinates) as Use2
+(Enter coordinates of Triangle) as Use2_1
+(Enter coordinates of Quadrilateral) as Use2_2
+(Enter coordinates of Pentagon) as Use2_3
+(Check params of figure) as Use3
+(Check perimetr of figure) as Use3_1
+(Check square of figure) as Use3_2
+(Check type of figure) as Use3_3
+(Draw Triangle) as Use4
+(Draw Quadrilateral) as Use5
+(Draw Pentagon) as Use6
+
+left to right direction
+Actor --> Use1
+Use1 <.. Use1_1 : extends
+Use1 <.. Use1_3 : extends
+Use1 <.. Use1_2 : extends
+Use1 .> Use2 : include
+Actor --> Use2
+Use2 <.. Use2_1 : extends
+Use2 <.. Use2_3 : extends
+Use2 <.. Use2_2 : extends
+Actor --> Use3
+Use3 <.. Use3_1 : extends
+Use3 <.. Use3_3 : extends
+Use3 <.. Use3_2 : extends
+Actor --> Use4
+Actor --> Use5
+Actor --> Use6
+
+@enduml
